@@ -56,7 +56,7 @@ print(np.exp(g3.score_samples(x1.reshape(-1, 1))) * N * 0.2)
 print("")
 
 ########################################################################################################################
-xcnt: Counter[float] = Counter({82.0: 0, 93.0: 0})
+xcnt = Counter({82.0: 0, 93.0: 0})
 xcnt.update(vals)
 xy = np.array(sorted(xcnt.items()))
 
