@@ -35,9 +35,9 @@ print(g2.means_[1][0])
 print(g2.covariances_[1])
 
 g3 = mixture.GaussianMixture(n_components=3, covariance_type='spherical', tol=1e-3, max_iter=1000, random_state=103,
-                             means_init=np.array([[85.67], [86.99], [89.21]]),
+                             means_init=np.array([[85], [87], [89]]),
                              weights_init=np.array([0.24, 0.42, 0.34]),
-                             precisions_init=np.array([1/0.40, 1/0.59, 1/0.88]))
+                             precisions_init=np.array([1/0.40, 1/0.59, 1/1.1]))
 g3.fit(vals.reshape(-1, 1))
 print("GaussianMixture 3", g3.converged_)
 print(g3.weights_[0])
@@ -82,22 +82,22 @@ def pdf(v, amplitude, center, sigma):
 
 
 cdfModel1 = Model(cdf, prefix='p1_')
-params1 = cdfModel1.make_params(p1_amplitude=200, p1_center=86, p1_sigma=1.3)
+params1 = cdfModel1.make_params(p1_amplitude=300, p1_center=86, p1_sigma=1.3)
 params1['p1_amplitude'].min = 50.
 result1 = cdfModel1.fit(y, params1, v=x, weights=w)
 
 cdfModel2 = Model(cdf, prefix='p1_') + Model(cdf, prefix='p2_')
-params2 = cdfModel2.make_params(p1_amplitude=140, p1_center=86, p1_sigma=1,
-                                p2_amplitude=60, p2_center=89, p2_sigma=1.2
+params2 = cdfModel2.make_params(p1_amplitude=250, p1_center=86, p1_sigma=1,
+                                p2_amplitude=60, p2_center=89, p2_sigma=0.8
                                 )
 params2['p1_amplitude'].min = 43.
 params2['p2_amplitude'].min = 13.
 result2 = cdfModel2.fit(y, params2, v=x, weights=w)
 
 cdfModel3 = Model(cdf, prefix='p1_') + Model(cdf, prefix='p2_') + Model(cdf, prefix='p3_')
-params3 = cdfModel3.make_params(p1_amplitude=80, p1_center=85, p1_sigma=0.6,
-                                p2_amplitude=40, p2_center=87, p2_sigma=0.2,
-                                p3_amplitude=80, p3_center=90, p3_sigma=1.4
+params3 = cdfModel3.make_params(p1_amplitude=40, p1_center=85, p1_sigma=0.6,
+                                p2_amplitude=80, p2_center=87, p2_sigma=0.3,
+                                p3_amplitude=180, p3_center=88, p3_sigma=1.4
                                 )
 params3['p1_amplitude'].min = 13.
 params3['p2_amplitude'].min = 13.
